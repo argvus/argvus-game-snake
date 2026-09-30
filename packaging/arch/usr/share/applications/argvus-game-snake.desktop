@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+# Launch the TUI through the shared ARGVUS Kitty profile so Hyprland can apply
+# the same floating window policy as the Control Center.
+Name=ARGVUS Snake
+Name[pt_BR]=Snake ARGVUS
+Comment=Play the retro terminal Snake game
+Comment[pt_BR]=Jogue o Snake retro no terminal
+Exec=argvus-tui-terminal --class argvus-game-snake --term kitty --profile control-center -- argvus-game-snake
+Icon=applications-games
+Terminal=false
+Categories=Game;
+Keywords=Game;Snake;Vi;Terminal;

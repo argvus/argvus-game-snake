@@ -1,0 +1,56 @@
+# Maintainer: William C. Canin
+pkgname=argvus-game-snake
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Retro terminal Snake game for the ARGVUS desktop"
+arch=('x86_64')
+url="https://github.com/argvus/argvus-game-snake"
+license=('GPL-3.0-only')
+depends=('argvus-app-profiles' 'argvus-appearance' 'argvus-i18n' 'gcc-libs' 'glibc')
+makedepends=('cargo')
+options=('!debug')
+source=("${pkgname}-${pkgver}.tar.gz")
+sha256sums=()
+
+_source_dir() {
+  find "${srcdir}" -mindepth 1 -maxdepth 1 -type d -print -quit
+}
+
+_cargo_target_dir() {
+  printf '%s\n' "${CARGO_TARGET_DIR:-"${srcdir}/target"}"
+}
+
+build() {
+  [[ -d "$srcdir/argvus-i18n" && -d "$srcdir/argvus-tui" ]] || {
+    printf '%s\n' 'argvus-i18n and argvus-tui sources are required' >&2
+    return 1
+  }
+  cd "$(_source_dir)"
+  local cargo_target_dir
+  cargo_target_dir="$(_cargo_target_dir)"
+  export CARGO_TARGET_DIR="$cargo_target_dir"
+  export RUSTFLAGS="${RUSTFLAGS:-} --remap-path-prefix=${srcdir}=."
+  cargo build --workspace --release --locked
+}
+
+check() {
+  cd "$(_source_dir)"
+  local cargo_target_dir
+  cargo_target_dir="$(_cargo_target_dir)"
+  export CARGO_TARGET_DIR="$cargo_target_dir"
+  export RUSTFLAGS="${RUSTFLAGS:-} --remap-path-prefix=${srcdir}=."
+  cargo test --workspace --release --locked
+}
+
+package() {
+  cd "$(_source_dir)"
+  local cargo_target_dir
+  cargo_target_dir="$(_cargo_target_dir)"
+
+  install -Dm755 "${cargo_target_dir}/release/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+
+  install -Dm644 "LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -Dm644 packaging/arch/usr/share/applications/argvus-game-snake.desktop \
+    "${pkgdir}/usr/share/applications/argvus-game-snake.desktop"
+}

@@ -1,0 +1,23 @@
+[package]
+name = "argvus-game-snake"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+description.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+
+[[bin]]
+name = "argvus-game-snake"
+path = "src/main.rs"
+
+[dependencies]
+argvus-game-snake-core.workspace = true
+argvus-i18n.workspace = true
+argvus-theme.workspace = true
+argvus-tui.workspace = true
+crossterm.workspace = true
+ratatui.workspace = true

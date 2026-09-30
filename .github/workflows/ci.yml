@@ -1,0 +1,88 @@
+name: Package Compilation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate package sources
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install validation tools
+        run: |
+          pacman -Syu --noconfirm --needed base-devel cargo git namcap pacman-contrib shellcheck sudo
+
+      - name: Prepare unprivileged build user
+        run: |
+          useradd --create-home --shell /bin/bash builder
+          printf 'builder ALL=(ALL) NOPASSWD: ALL\n' >/etc/sudoers.d/builder
+          chown -R builder:builder "$GITHUB_WORKSPACE"
+
+      - name: Validate repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo -u builder make check
+          sudo -u builder make validate
+
+      - name: Build local package
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo -u builder make package
+
+      - name: Lint CI PKGBUILD with namcap
+        shell: bash
+        run: |
+          set -euo pipefail
+          output="$(namcap packaging/arch/ci/PKGBUILD 2>&1)" || status=$?
+          status="${status:-0}"
+          printf '%s\n' "$output"
+          unexpected="$(printf '%s\n' "$output" | grep -v 'E: Missing checksums' || true)"
+          if [[ "$status" -ne 0 && "$unexpected" == *' E: '* ]]; then
+            exit "$status"
+          fi
+
+      - name: Lint local PKGBUILD with namcap
+        shell: bash
+        run: |
+          set -euo pipefail
+          output="$(namcap packaging/arch/local/PKGBUILD 2>&1)" || status=$?
+          status="${status:-0}"
+          printf '%s\n' "$output"
+          unexpected="$(printf '%s\n' "$output" | grep -v 'E: Missing checksums' || true)"
+          if [[ "$status" -ne 0 && "$unexpected" == *' E: '* ]]; then
+            exit "$status"
+          fi
+
+      - name: Lint built package with namcap
+        shell: bash
+        run: |
+          set -euo pipefail
+          namcap build/dist/*.pkg.tar.zst
+
+  spellcheck:
+    name: Spellcheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Run cspell
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          config: cspell.json

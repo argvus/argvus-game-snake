@@ -1,0 +1,31 @@
+[workspace]
+resolver = "2"
+members = [
+  "crates/core",
+  "crates/main",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "GPL-3.0-only"
+rust-version = "1.95"
+authors = ["ARGVUS"]
+repository = "https://github.com/argvus/argvus-game-snake"
+homepage = "https://github.com/argvus/argvus-game-snake"
+description = "Retro terminal Snake game for the ARGVUS desktop"
+
+[workspace.dependencies]
+argvus-game-snake-core = { version = "0.1.0", path = "crates/core" }
+argvus-i18n = { package = "argvus-i18n-core", path = "../argvus-i18n/crates/core" }
+argvus-theme = { path = "../argvus-tui/crates/argvus-theme" }
+argvus-tui = { path = "../argvus-tui/crates/argvus-tui" }
+crossterm = "0.29"
+ratatui = "0.30.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+
+[profile.release]
+lto = true
+strip = true
