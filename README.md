@@ -42,8 +42,8 @@ make check
 make build
 ```
 
-The local package builder expects sibling checkouts of `argvus-i18n` and
-`argvus-tui` under the same `de/` directory.
+The local package builder expects the sibling `argvus` checkout under the same
+`de/` directory; its crates are path dependencies.
 
 ## Workspace
 

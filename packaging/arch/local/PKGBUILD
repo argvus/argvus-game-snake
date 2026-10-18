@@ -6,7 +6,7 @@ pkgdesc="Retro terminal Snake game for the ARGVUS desktop"
 arch=('x86_64')
 url="https://github.com/argvus/argvus-game-snake"
 license=('GPL-3.0-only')
-depends=('argvus-app-profiles' 'argvus-appearance' 'argvus-i18n' 'gcc-libs' 'glibc')
+depends=('argvus' 'argvus-app-profiles' 'argvus-appearance' 'gcc-libs' 'glibc')
 makedepends=('cargo')
 options=('!debug')
 source=("${pkgname}-${pkgver}.tar.gz")
@@ -21,8 +21,8 @@ _cargo_target_dir() {
 }
 
 build() {
-  [[ -d "$srcdir/argvus-i18n" && -d "$srcdir/argvus-tui" ]] || {
-    printf '%s\n' 'argvus-i18n and argvus-tui sources are required' >&2
+  [[ -d "$srcdir/argvus" ]] || {
+    printf '%s\n' 'the argvus workspace sources are required' >&2
     return 1
   }
   cd "$(_source_dir)"

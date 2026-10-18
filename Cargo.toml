@@ -17,9 +17,9 @@ description = "Retro terminal Snake game for the ARGVUS desktop"
 
 [workspace.dependencies]
 argvus-game-snake-core = { version = "0.1.0", path = "crates/core" }
-argvus-i18n = { package = "argvus-i18n-core", path = "../argvus-i18n/crates/core" }
-argvus-theme = { path = "../argvus-tui/crates/argvus-theme" }
-argvus-tui = { path = "../argvus-tui/crates/argvus-tui" }
+argvus-i18n = { package = "argvus-i18n-core", path = "../argvus/crates/argvus-i18n-core" }
+argvus-theme = { path = "../argvus/crates/argvus-theme" }
+argvus-tui = { path = "../argvus/crates/argvus-tui" }
 crossterm = "0.29"
 ratatui = "0.30.2"
 serde = { version = "1.0", features = ["derive"] }

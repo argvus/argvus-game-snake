@@ -19,22 +19,17 @@ find "$DIST_DIR" -maxdepth 1 -type f -name "${pkgname}-*.pkg.tar.*" -delete
 
 archive="$ARTIFACTS_DIR/${pkgname}-${pkgver}.tar.gz"
 
-I18N_ROOT="$ROOT_DIR/../argvus-i18n"
-TUI_ROOT="$ROOT_DIR/../argvus-tui"
+ARGVUS_ROOT="$ROOT_DIR/../argvus"
 
-[[ -f "$I18N_ROOT/Cargo.toml" ]] || {
-  printf '%s\n' "argvus-i18n checkout not found beside $ROOT_DIR" >&2
-  exit 1
-}
-[[ -f "$TUI_ROOT/Cargo.toml" ]] || {
-  printf '%s\n' "argvus-tui checkout not found beside $ROOT_DIR" >&2
+[[ -f "$ARGVUS_ROOT/Cargo.toml" ]] || {
+  printf '%s\n' "argvus checkout not found beside $ROOT_DIR" >&2
   exit 1
 }
 
 echo "Creating local source archive: $archive"
 staging_dir="$(mktemp -d)"
 trap 'rm -rf -- "$staging_dir"' EXIT
-mkdir -p "$staging_dir/${pkgname}-${pkgver}" "$staging_dir/argvus-i18n" "$staging_dir/argvus-tui"
+mkdir -p "$staging_dir/${pkgname}-${pkgver}" "$staging_dir/argvus"
 
 tar -cf - \
   --exclude='./.git' \
@@ -54,20 +49,17 @@ tar -cf - \
   -C "$ROOT_DIR" . \
   | tar -xf - -C "$staging_dir/${pkgname}-${pkgver}"
 
-for dependency_root in "$I18N_ROOT" "$TUI_ROOT"; do
-  dependency_name="${dependency_root##*/}"
-  tar -cf - \
-    --exclude='./.git' \
-    --exclude='./build' \
-    --exclude='*/build' \
-    --exclude='./target' \
-    --exclude='*/target' \
-    -C "$dependency_root" . \
-    | tar -xf - -C "$staging_dir/$dependency_name"
-done
+tar -cf - \
+  --exclude='./.git' \
+  --exclude='./build' \
+  --exclude='*/build' \
+  --exclude='./target' \
+  --exclude='*/target' \
+  -C "$ARGVUS_ROOT" . \
+  | tar -xf - -C "$staging_dir/argvus"
 
 tar -czf "$archive" -C "$staging_dir" \
-  "${pkgname}-${pkgver}" argvus-i18n argvus-tui
+  "${pkgname}-${pkgver}" argvus
 
 if [[ -n "${MAKEPKG_FLAGS:-}" ]]; then
   # shellcheck disable=SC2206
