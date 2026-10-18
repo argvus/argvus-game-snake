@@ -73,6 +73,7 @@ install: package
 install-package: install
 
 validate:
+	@sh tools/sh/sync-skeleton.sh --check
 	@shellcheck tools/sh/pkgbuild_local.sh
 	@cargo metadata --locked --no-deps --format-version 1 >/dev/null
 	@cd packaging/arch/ci && makepkg -p PKGBUILD --printsrcinfo >/dev/null
