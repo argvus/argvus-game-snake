@@ -18,12 +18,26 @@ jobs:
     container: archlinux:latest
 
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-
       - name: Install validation tools
         run: |
           pacman -Syu --noconfirm --needed base-devel cargo git namcap pacman-contrib shellcheck sudo
+
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Checkout argvus workspace (path dependencies)
+        uses: actions/checkout@v4
+        with:
+          repository: argvus/argvus
+          path: argvus-src
+          persist-credentials: false
+
+      - name: Link argvus beside the package
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Cargo.toml reaches the shared crates through ../argvus/crates.
+          ln -s "$GITHUB_WORKSPACE/argvus-src" "$GITHUB_WORKSPACE/../argvus"
 
       - name: Prepare unprivileged build user
         run: |
@@ -81,6 +95,20 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+
+      - name: Checkout argvus workspace (path dependencies)
+        uses: actions/checkout@v4
+        with:
+          repository: argvus/argvus
+          path: argvus-src
+          persist-credentials: false
+
+      - name: Link argvus beside the package
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Cargo.toml reaches the shared crates through ../argvus/crates.
+          ln -s "$GITHUB_WORKSPACE/argvus-src" "$GITHUB_WORKSPACE/../argvus"
 
       - name: Run cspell
         uses: streetsidesoftware/cspell-action@v6
