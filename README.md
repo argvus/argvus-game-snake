@@ -12,7 +12,7 @@ local ranking storage, and Arch package tooling.
 ## Install
 
 ```sh
-sudo pacman -S argvus game-snake
+sudo pacman -S argvus-game-snake
 ```
 
 The package installs `/usr/lib/argvus/commands/argvus-game-snake`. The ARGVUS dispatcher also

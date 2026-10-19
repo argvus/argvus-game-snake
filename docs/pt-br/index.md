@@ -1,7 +1,6 @@
 ---
 title: Snake
 description: Jogue o Snake retro do ARGVUS no terminal.
-slug: pt/0.4.0/docs/user-guide/applications/snake
 ---
 
 Abra o jogo com:

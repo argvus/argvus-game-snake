@@ -16,7 +16,7 @@ source=(
 sha256sums=()
 
 _source_dir() {
-  find "${srcdir}" -mindepth 1 -maxdepth 1 -type d -print -quit
+  printf '%s\n' "${srcdir}/${pkgname}-${pkgver}"
 }
 
 build() {

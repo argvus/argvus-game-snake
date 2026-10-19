@@ -33,6 +33,7 @@ mkdir -p "$staging_dir/${pkgname}-${pkgver}" "$staging_dir/argvus"
 
 tar -cf - \
   --exclude='./.git' \
+    --exclude='./argvus-src' \
   --exclude='./.release' \
   --exclude='./packages-repo' \
   --exclude='./build' \
