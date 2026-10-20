@@ -206,8 +206,6 @@
     "Cargo.toml",
     "rustfmt.toml",
     "PKGBUILD*",
-    "cliff.toml",
-    "CHANGELOG.md",
     "*.1"
   ],
   "cSpell.customDictionaries": {

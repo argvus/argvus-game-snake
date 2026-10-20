@@ -47,10 +47,10 @@ package() {
   local cargo_target_dir
   cargo_target_dir="$(_cargo_target_dir)"
 
-  install -Dm755 "${cargo_target_dir}/release/${pkgname}" "${pkgdir}/usr/lib/argvus/commands/${pkgname}"
+  install -Dm755 "${cargo_target_dir}/release/${pkgname}" "${pkgdir}/usr/lib/argvus/commands/game-snake"
   install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
 
   install -Dm644 "LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
-  install -Dm644 packaging/arch/usr/share/applications/argvus-game-snake.desktop \
+  install -Dm644 src/usr/share/applications/argvus-game-snake.desktop \
     "${pkgdir}/usr/share/applications/argvus-game-snake.desktop"
 }

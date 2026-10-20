@@ -15,7 +15,6 @@
     "build",
     "LICENSE",
     "TODO.txt",
-    "cliff.toml",
     "**/PKGBUILD*"
   ]
 }

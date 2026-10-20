@@ -1,5 +1,5 @@
 .PHONY: help build package pkg rust-build release install install-package clean \
-	validate lint-shell fmt fmt-check clippy test tests check audit deny machete changelog
+	validate lint-shell fmt fmt-check clippy test tests check audit deny machete
 
 .DEFAULT_GOAL := help
 
@@ -13,7 +13,6 @@ help:
 	@echo "  make clean           - remove build/ and cargo outputs"
 	@echo "  make validate        - validate scripts and PKGBUILD metadata"
 	@echo "  make check           - run formatting, lint and Rust tests"
-	@echo "  make changelog       - regenerate CHANGELOG.md with git-cliff"
 
 lint-shell:
 	@for root in tools packaging/arch/common src; do \
@@ -76,12 +75,9 @@ validate:
 	@sh tools/sh/sync-skeleton.sh --check
 	@shellcheck tools/sh/pkgbuild_local.sh
 	@cargo metadata --locked --no-deps --format-version 1 >/dev/null
-	@cd packaging/arch/ci && makepkg -p PKGBUILD --printsrcinfo >/dev/null
+	@cd packaging/arch/remote && makepkg -p PKGBUILD --printsrcinfo >/dev/null
 	@cd packaging/arch/local && makepkg -p PKGBUILD --printsrcinfo >/dev/null
 	@echo "Validation OK"
-
-changelog:
-	@git-cliff -o CHANGELOG.md
 
 clean:
 	@cargo clean

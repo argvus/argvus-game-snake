@@ -33,8 +33,7 @@ sudo pacman -S --needed base-devel cargo git gnupg make pacman-contrib shellchec
 
 - `pacman-contrib` provides `updpkgsums` (regenerates PKGBUILD checksums).
 - `shellcheck` is used to validate `pkgbuild_local.sh`.
-- Optional: `namcap` (package linting) and `git-cliff` (changelog generation,
-  `make changelog`). Spellchecking runs in CI with cspell (`cspell.json`).
+- Optional: `namcap` (package linting). Spellchecking runs in CI with cspell (`cspell.json`).
 
 ## Local build
 
@@ -130,67 +129,17 @@ signs without it).
    - GitLab: adjust `source=` to the format
      `https://gitlab.com/argvus/<pkg>/-/archive/v${pkgver}/<pkg>-v${pkgver}.tar.gz`.
 2. Check versions/metadata in `packaging/arch/local/PKGBUILD` and
-   `packaging/arch/ci/PKGBUILD`.
-3. Generate and commit the changelog (see
-   [Changelog](#changelog-changelogmd)).
-4. Create and push the tag:
+   `packaging/arch/remote/PKGBUILD`.
+3. Create and push the tag:
 
    ```sh
    git tag v0.1.0
    git push origin v0.1.0
    ```
 
-5. `release.yml` runs: `updpkgsums` (validates the source) → `makepkg`
+4. `release.yml` runs: `updpkgsums` (validates the source) → `makepkg`
    (produces the `.zst`) → GPG signing → `actions/upload-artifact` →
    `repo-add` → commit/push in `argvus/packages` (`public/arch/x86_64`).
-
-## Changelog (`CHANGELOG.md`)
-
-`CHANGELOG.md` is generated from the git history
-([Conventional Commits](CONTRIBUTING.md#development-flow)) with
-[git-cliff](https://git-cliff.org):
-
-```sh
-make changelog    # = git-cliff -o CHANGELOG.md
-```
-
-Run it **before tagging a release**:
-
-```sh
-# 1. commit conventional commits on main (feat:, fix:, docs:, ...)
-
-# 2. generate the changelog up to the pending commits
-make changelog
-
-# 3. commit the regenerated CHANGELOG.md
-git add CHANGELOG.md
-git commit -m "docs(changelog): update for v0.1.0"
-
-# 4. create and push the tag (triggers release.yml)
-git tag v0.1.0
-git push origin v0.1.0
-```
-
-How it behaves:
-
-- `git-cliff` builds the `[Unreleased]` section from commits **since the last
-  tag**. With no tags yet, everything lands under `[Unreleased]`.
-- If you generate **after** tagging, the new commits are already attributed to
-  the version; the dated entry only settles on the next run. Generating before
-  tagging keeps the flow clean: `[Unreleased]` → commit → tag → next cycle the
-  section becomes `[0.1.0] - <date>` automatically.
-
-Useful tools:
-
-```sh
-git-cliff --unreleased --strip header   # preview only the pending changes
-git-cliff --bump                        # suggest the next version (semver)
-```
-
-> The changelog is generated from the git history, so a freshly initialized
-> repository needs at least one commit before the first `make changelog`
-> (an unborn `HEAD` makes git-cliff fail with
-> `reference 'refs/heads/main' not found`).
 
 ## Local checks before committing
 
@@ -198,9 +147,6 @@ git-cliff --bump                        # suggest the next version (semver)
 make validate
 make build
 ```
-
-Optionally regenerate the changelog with `make changelog` (requires
-`git-cliff`).
 
 ## Troubleshooting
 

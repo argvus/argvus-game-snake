@@ -14,12 +14,12 @@
 ## Author Checklist
 
 - [ ] `shellcheck tools/sh/pkgbuild_local.sh` passes
-- [ ] `cd packaging/arch/ci && makepkg -p PKGBUILD --printsrcinfo >/dev/null` passes
+- [ ] `cd packaging/arch/remote && makepkg -p PKGBUILD --printsrcinfo >/dev/null` passes
 - [ ] `make build` produces the expected `.pkg.tar.zst` in `build/dist/`
 - [ ] `sha256sums` does **not** use `SKIP` (only `sha256sums=()` committed)
 - [ ] No `build/` artifacts or `PKGBUILD.local` are committed
 - [ ] No secrets (`GPG_PRIVATE_KEY`, `GPG_PASSPHRASE`, `PACKAGES_REPO_TOKEN`) are added or logged
-- [ ] `packaging/arch/local/PKGBUILD` and `packaging/arch/ci/PKGBUILD` stay in sync (version, `url`, sources)
+- [ ] `packaging/arch/local/PKGBUILD` and `packaging/arch/remote/PKGBUILD` stay in sync (version, `url`, sources)
 - [ ] Conventional commit (`feat:`/`fix:`/`docs:`/`chore:`/`refactor:`/`test:`/`ci:`)
 
 ## Validation

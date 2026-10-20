@@ -58,11 +58,11 @@ jobs:
           set -euo pipefail
           sudo -u builder make package
 
-      - name: Lint CI PKGBUILD with namcap
+      - name: Lint remote PKGBUILD with namcap
         shell: bash
         run: |
           set -euo pipefail
-          output="$(namcap packaging/arch/ci/PKGBUILD 2>&1)" || status=$?
+          output="$(namcap packaging/arch/remote/PKGBUILD 2>&1)" || status=$?
           status="${status:-0}"
           printf '%s\n' "$output"
           unexpected="$(printf '%s\n' "$output" | grep -v 'E: Missing checksums' || true)"
