@@ -54,7 +54,7 @@ crates/
 packaging/
   arch/
     local/    package built from the current working tree
-    ci/       package built from a version tag
+    remote/      package built from a version tag
 tools/sh/     local source archive and makepkg driver
 ```
 
