@@ -160,4 +160,4 @@ make build
   tag name, and archive URL format match the host (GitHub vs GitLab) — see the
   release section.
 
-See also [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow.
+See also [CONTRIBUTING.md](https://github.com/argvus/.github/blob/main/CONTRIBUTING.md) for the contribution workflow.
