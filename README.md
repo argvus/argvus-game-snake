@@ -5,6 +5,12 @@ keys `h`, `j`, `k` and `l` to encourage keyboard-first navigation.
 
 [![CI](https://github.com/argvus/argvus-game-snake/actions/workflows/ci.yml/badge.svg)](https://github.com/argvus/argvus-game-snake/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
+[![Rust 1.95+](https://img.shields.io/badge/Rust-1.95%2B-orange?logo=rust)](https://www.rust-lang.org/)
+[![Platform: Arch Linux | Wayland](https://img.shields.io/badge/platform-Arch%20Linux%20%7C%20Wayland-1793D1?logo=archlinux&logoColor=white)](https://archlinux.org/)
+[![Pull requests](https://img.shields.io/github/issues-pr/argvus/argvus-game-snake)](https://github.com/argvus/argvus-game-snake/pulls)
+[![Issues](https://img.shields.io/github/issues/argvus/argvus-game-snake)](https://github.com/argvus/argvus-game-snake/issues)
+[![Last commit](https://img.shields.io/github/last-commit/argvus/argvus-game-snake)](https://github.com/argvus/argvus-game-snake/commits/main)
+[![Docs](https://img.shields.io/badge/docs-project-blue)](./docs/)
 
 The repository contains the deterministic game engine, Ratatui terminal UI,
 local ranking storage, and Arch package tooling.
