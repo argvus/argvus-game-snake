@@ -23,10 +23,10 @@ jobs:
           pacman -Syu --noconfirm --needed base-devel cargo git namcap pacman-contrib shellcheck sudo
 
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout argvus workspace (path dependencies)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: argvus/argvus
           path: argvus-src
@@ -94,10 +94,10 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout argvus workspace (path dependencies)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: argvus/argvus
           path: argvus-src
@@ -111,6 +111,6 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/argvus-src" "$GITHUB_WORKSPACE/../argvus"
 
       - name: Run cspell
-        uses: streetsidesoftware/cspell-action@v6
+        uses: streetsidesoftware/cspell-action@v9
         with:
           config: cspell.json
