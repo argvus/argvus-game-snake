@@ -1,6 +1,6 @@
 # Maintainer: William C. Canin
 pkgname=argvus-game-snake
-pkgver=0.1.0
+pkgver=0.0.0
 pkgrel=1
 pkgdesc="Retro terminal Snake game for the ARGVUS desktop"
 arch=('x86_64')
