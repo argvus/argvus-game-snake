@@ -53,6 +53,13 @@ What happens:
    packaging reuses Cargo artifacts in `build/cargo-target/`; `make clean`
    removes that cache.
 
+Before building, the helper checks the declared `makedepends` (currently
+`cargo`) with `pacman -T`. The build uses `makepkg --nodeps`, so runtime
+dependencies do not have to be installed to create the package. Missing build
+tools stop the build; the helper does not install them. `make install` installs
+the package through pacman, which resolves its runtime dependencies from the
+configured repositories.
+
 Result:
 
 ```text

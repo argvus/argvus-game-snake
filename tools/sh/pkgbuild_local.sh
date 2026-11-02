@@ -14,6 +14,26 @@ PKGBUILD="$PKGBUILD_DIR/PKGBUILD"
 
 read -r pkgname pkgver <<<"$(bash -c 'source "$1"; printf "%s %s" "$pkgname" "$pkgver"' bash "$PKGBUILD")"
 
+build_dependencies="$(bash -c 'source "$1"; printf "%s\n" "${makedepends[@]}"' bash "$PKGBUILD")"
+if [[ -n "$build_dependencies" ]]; then
+  mapfile -t build_dependencies <<< "$build_dependencies"
+  command -v pacman >/dev/null 2>&1 || {
+    printf 'error: pacman is required to check build dependencies\n' >&2
+    exit 1
+  }
+  if missing_dependencies="$(pacman -T "${build_dependencies[@]}")"; then
+    :
+  else
+    pacman_status=$?
+    if (( pacman_status == 127 )); then
+      printf 'error: missing build dependencies for %s:\n%s\n' "$pkgname" "$missing_dependencies" >&2
+    else
+      printf 'error: pacman could not check build dependencies for %s (exit %s)\n' "$pkgname" "$pacman_status" >&2
+    fi
+    exit 1
+  fi
+fi
+
 mkdir -p "$ARTIFACTS_DIR" "$DIST_DIR" "$CARGO_TARGET_CACHE"
 find "$DIST_DIR" -maxdepth 1 -type f -name "${pkgname}-*.pkg.tar.*" -delete
 
