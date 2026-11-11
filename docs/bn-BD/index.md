@@ -1,0 +1,39 @@
+---
+title: Snake
+description: রেট্রো ARGVUS টার্মিনাল স্নেক গেম খেলুন।
+---
+
+গেমটি খোলার জন্য ব্যবহার করুন:
+
+```sh
+argvus game-snake
+```
+
+When the game opens, press 
+
+ to start moving right, or press `Enter`, `h`,
+
+ or `j` ARGVUS Snake  l  `k`  to start immediately in that direction. The application menu also
+contains an 
+
+ launcher.
+
+লঞ্চারটি গেমটি স্ট্যান্ডার্ড ARGVUS Kitty প্রোফাইলের মাধ্যমে
+কেন্দ্রিক ফ্লোটিং উইন্ডোতে খুলে, যা  `l`  `ARGVUS Snake` `1380x840` মাপের এবং কন্ট্রোল সেন্টারের সাথে মেলে।
+
+`argvus-game-snake` একটি পিক্সেল-স্টাইল টার্মিনাল গেম। এর আন্দোলন সচেতনভাবে
+স্ট্যান্ডার্ড Vi কি ব্যবহার করে:
+
+- `h`: left;
+- `j`: down;
+- `k`: up;
+- `l`: right.
+
+সাপ খাবার খেলে বাড়ে। দেয়াল বা সাপের নিজস্ব দেহ স্পর্শ করা
+রাউন্ড শেষ হয়। `p` বা স্পেস বিরতি দেয়, `r` গেম ওভার হওয়ার পরে পুনরায় চালু করে, এবং `q` বা
+Esc exits.
+
+স্থানীয় শীর্ষ দশ র‌্যাঙ্কিং সংরক্ষণ করা হয়
+`$XDG_CONFIG_HOME/argvus/games/snake/ranking.json`, অথবা
+ডিফল্টভাবে `~/.config/argvus/games/snake/ranking.json`। প্যাকেজ ইনস্টলেশন
+হোম ডিরেক্টরিতে ফাইল তৈরি করে না।
