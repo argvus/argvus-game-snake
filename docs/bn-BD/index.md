@@ -1,5 +1,5 @@
 ---
-title: Snake
+title: সাপ
 description: রেট্রো ARGVUS টার্মিনাল স্নেক গেম খেলুন।
 ---
 
@@ -9,12 +9,12 @@ description: রেট্রো ARGVUS টার্মিনাল স্নে�
 argvus game-snake
 ```
 
-When the game opens, press 
+গেমটি খুললে, টিপুন
 
  to start moving right, or press `Enter`, `h`,
 
- or `j` ARGVUS Snake  l  `k`  to start immediately in that direction. The application menu also
-contains an 
+ অথবা `j` ARGVUS সাপ l `k` সেই দিকে অবিলম্বে শুরু করতে। এছাড়াও অ্যাপ্লিকেশন মেনু
+contains an
 
  launcher.
 
@@ -24,14 +24,14 @@ contains an
 `argvus-game-snake` একটি পিক্সেল-স্টাইল টার্মিনাল গেম। এর আন্দোলন সচেতনভাবে
 স্ট্যান্ডার্ড Vi কি ব্যবহার করে:
 
-- `h`: left;
-- `j`: down;
-- `k`: up;
-- `l`: right.
+- `h`: বাম;
+- `j`: নিচে;
+- `k`: আপ;
+- `l`: ডান।
 
 সাপ খাবার খেলে বাড়ে। দেয়াল বা সাপের নিজস্ব দেহ স্পর্শ করা
 রাউন্ড শেষ হয়। `p` বা স্পেস বিরতি দেয়, `r` গেম ওভার হওয়ার পরে পুনরায় চালু করে, এবং `q` বা
-Esc exits.
+Esc প্রস্থান করে।
 
 স্থানীয় শীর্ষ দশ র‌্যাঙ্কিং সংরক্ষণ করা হয়
 `$XDG_CONFIG_HOME/argvus/games/snake/ranking.json`, অথবা

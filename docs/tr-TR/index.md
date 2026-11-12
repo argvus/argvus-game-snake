@@ -1,5 +1,5 @@
 ---
-title: Snake
+title: Yılan
 description: Retro ARGVUS terminal Yılan oyununu oynayın.
 ---
 
@@ -19,14 +19,14 @@ merkezli, `1380x840` boyutunda kayan bir pencerede açar.
 `argvus-game-snake` pikselli tarzda bir terminal oyunudur. Hareketleri kasıtlı olarak
 standart Vi tuşlarını kullanır:
 
-- `h`: left;
-- `j`: down;
-- `k`: up;
-- `l`: right.
+- `h`: sol;
+- `j`: aşağı;
+- `k`: yukarı;
+- `l`: doğru.
 
 Yılan yemek yediğinde büyür. Duvara veya yılanın kendi vücuduna dokunmak
 turunu bitirir. `p` veya Space duraklatır, `r` Game Over'dan sonra yeniden başlatır ve `q` veya
-Esc exits.
+Esc çıkar.
 
 Yerel ilk-on sıralaması şurada saklanır
 `$XDG_CONFIG_HOME/argvus/games/snake/ranking.json`, veya

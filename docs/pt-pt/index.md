@@ -1,5 +1,5 @@
 ---
-title: Snake
+title: Cobra
 description: Jogue o Snake retro do ARGVUS no terminal.
 ---
 

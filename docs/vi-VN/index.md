@@ -1,5 +1,5 @@
 ---
-title: Snake
+title: Con rắn
 description: Chơi trò chơi rắn trên terminal ARGVUS cổ điển.
 ---
 
@@ -19,14 +19,14 @@ Trình khởi chạy mở trò chơi thông qua hồ sơ ARGVUS Kitty tiêu chu�
 `argvus-game-snake` là một trò chơi terminal phong cách pixel. Chuyển động của nó cố ý
 sử dụng các phím Vi tiêu chuẩn:
 
-- `h`: left;
-- `j`: down;
-- `k`: up;
-- `l`: right.
+- `h`: trái;
+- `j`: xuống;
+- `k`: lên;
+- `l`: đúng rồi.
 
 Con rắn sẽ lớn lên khi nó ăn thức ăn. Chạm vào tường hoặc vào cơ thể của chính con rắn
 sẽ kết thúc vòng chơi. `p` hoặc phím cách tạm dừng, `r` khởi động lại sau khi Game Over, và `q` hoặc
-Esc exits.
+Esc thoát ra.
 
 Bảng xếp hạng mười người chơi hàng đầu cục bộ được lưu trong
 `$XDG_CONFIG_HOME/argvus/games/snake/ranking.json`, hoặc

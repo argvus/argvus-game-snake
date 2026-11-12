@@ -1,5 +1,5 @@
 ---
-title: Snake
+title: Ular
 description: Mainkan permainan Snake terminal ARGVUS retro.
 ---
 
@@ -19,14 +19,14 @@ berukuran `1380x840`, sesuai dengan Pusat Kontrol.
 `argvus-game-snake` adalah permainan terminal gaya pixel. Gerakannya secara sengaja
 menggunakan tombol Vi standar:
 
-- `h`: left;
-- `j`: down;
-- `k`: up;
-- `l`: right.
+- `h`: kiri;
+- `j`: turun;
+- `k`: naik;
+- `l`: benar.
 
 Ular akan tumbuh saat makan makanan. Menyentuh dinding atau tubuh ular itu sendiri
 akan mengakhiri putaran. `p` atau Spasi untuk jeda, `r` memulai ulang setelah Game Over, dan `q` atau
-Esc exits.
+Esc keluar.
 
 Peringkat sepuluh besar lokal disimpan dalam
 `$XDG_CONFIG_HOME/argvus/games/snake/ranking.json`, atau
